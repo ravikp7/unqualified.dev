@@ -73,7 +73,8 @@ module.exports = {
         short_name: `unqualified.dev`,
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#663399`,
+        theme_color: `#ffffff`,
+        theme_color_in_head: false,
         display: `minimal-ui`,
         icon: `src/images/square-shape-shadow.png`, // This path is relative to the root of the site.
       },
