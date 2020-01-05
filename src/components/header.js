@@ -1,35 +1,67 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
+import { useColorMode, css } from "theme-ui"
+import ToggleDark from "./toggleDark"
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
+const Header = ({ siteTitle }) => {
+  const [colorMode, setColorMode] = useColorMode()
+  const isDark = colorMode === "dark"
+  return (
+    <header
       style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        marginBottom: `1.45rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
+      <div
+        css={css({
+          margin: `0 auto`,
+          maxWidth: `container`,
+          padding: `1.45rem 1.0875rem`,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          position: "relative",
+        })}
+      >
+        <h3 style={{ margin: 0 }}>
+          <Link
+            to="/"
+            css={css({
+              color: `primary`,
+              textDecoration: `none`,
+              letterSpacing: "2px",
+            })}
+          >
+            {siteTitle}
+          </Link>
+        </h3>
+        <span
           style={{
-            color: `white`,
-            textDecoration: `none`,
+            position: "absolute",
+            right: "1.45rem",
+            height: "35px",
+            width: "35px",
           }}
         >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+          <span
+            style={{
+              position: "fixed",
+              zIndex: 1,
+            }}
+          >
+            <ToggleDark
+              isDark={isDark}
+              onToggle={() => {
+                setColorMode(isDark ? "light" : "dark")
+              }}
+            />
+          </span>
+        </span>
+      </div>
+    </header>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

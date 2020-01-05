@@ -1,21 +1,52 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import PostCard from "../components/post-card"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  const { edges } = data.allMdx
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <p>Latest Blog Posts</p>
+      {edges.map(({ node }) => {
+        const { id, frontmatter, excerpt, fields, timeToRead } = node
+        const { title, date, tags } = frontmatter
+        const { slug } = fields
+        return (
+          <PostCard
+            {...{ title, tags, excerpt, date, timeToRead }}
+            url={slug}
+            key={id}
+          />
+        )
+      })}
+    </Layout>
+  )
+}
 
 export default IndexPage
+
+export const query = graphql`
+  {
+    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+      edges {
+        node {
+          id
+          frontmatter {
+            date
+            tags
+            title
+          }
+          excerpt
+          fields {
+            slug
+          }
+          timeToRead
+        }
+      }
+    }
+  }
+`

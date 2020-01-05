@@ -1,0 +1,51 @@
+---
+title: "Demo Post for testing"
+date: "2019-12-20"
+tag: ['test', 'iot']
+---
+import { Styled } from 'theme-ui'
+import { Link } from 'gatsby'
+
+This is written in markdown.
+
+[Sample Link](https://google.com)
+
+[Hello Post](/blog/hello)
+
+<Styled.a as={ Link } to="/blog/hello">Hello</Styled.a>
+
+<p></p>
+
+> Block quote *emphasised*
+> tnrasetinraseit dstrast rst s trs t rst ars trsa t rst rsat rs t rsat rst rt
+
+This is `console.log('yes')` code example
+
+```jsx{3}
+<html>
+{const hello = 'world';}
+</html>
+```
+<p></p>
+
+---
+
+### Now some JS
+<h2>Yoo</h2>
+
+```javascript{2,5-8}
+function person(name) {
+    this.name = name;
+}
+
+// Some more JS
+const firstPerson = new person('Ravi').tarstars.tarstras;
+
+console.log(firstPerson.name);
+
+const secondPerson = new person('Kumar');
+```
+
+<div style={{ width: '100%', textAlign: 'center' }}>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/4n0xNbfJLR8" frameborder="0" allowfullscreen></iframe>
+</div>
