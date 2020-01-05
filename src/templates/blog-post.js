@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 export default ({ data }) => {
@@ -9,6 +10,7 @@ export default ({ data }) => {
   const { title, date } = frontmatter
   return (
     <Layout>
+      <SEO {...{ title }} />
       <div>
         <h1
           style={{
