@@ -16,11 +16,11 @@ export default ({ data, pageContext }) => {
       >{`Posts in the category "${category}"`}</p>
       {edges.map(({ node }) => {
         const { id, frontmatter, excerpt, fields, timeToRead } = node
-        const { title, date, categories } = frontmatter
+        const { title, date, categories, tags } = frontmatter
         const { slug } = fields
         return (
           <PostCard
-            {...{ title, categories, excerpt, date, timeToRead }}
+            {...{ title, categories, excerpt, date, timeToRead, tags }}
             url={slug}
             key={id}
           />

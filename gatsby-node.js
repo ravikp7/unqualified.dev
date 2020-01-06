@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
     query {
-      allMdx {
+      postsMarkdown: allMdx {
         edges {
           node {
             fields {
@@ -27,10 +27,17 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      tagsGroup: allMdx(limit: 200) {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
     }
   `)
 
-  result.data.allMdx.edges.forEach(({ node }) => {
+  const { postsMarkdown, tagsGroup } = result.data
+
+  postsMarkdown.edges.forEach(({ node }) => {
     const { slug } = node.fields
     createPage({
       path: slug,
@@ -47,8 +54,20 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/categories/${category}/`,
       component: path.resolve("./src/templates/categories.js"),
       context: {
-        category
-      }
+        category,
+      },
+    })
+  })
+
+  // Create pages for all tags
+  const tags = tagsGroup.group
+  tags.forEach(({ fieldValue: tag }) => {
+    createPage({
+      path: `/tags/${tag}`,
+      component: path.resolve("./src/templates/tags.js"),
+      context: {
+        tag,
+      },
     })
   })
 }

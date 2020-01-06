@@ -2,52 +2,85 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { Styled, css, useColorMode } from "theme-ui"
-import categories from "../utils/categories"
+import allCategories from "../utils/categories"
 
-const CategoryPill = ({ text }) => {
+const Categories = ({ categories, title }) => {
   const [colorMode] = useColorMode()
   return (
-    <Styled.a
-      as={Link}
-      to={`/categories/${text}/`}
-      css={css({
-        boxShadow: colorMode === "dark" ? `textShadowDark` : `textShadowLight`,
-        padding: `0 2px`,
-        marginRight: `0.4em`,
-        textDecoration: `none`,
-      })}
+    <div
+      style={{
+        fontSize: `0.8rem`,
+        display: `flex`,
+        marginBottom: `0.3rem`,
+      }}
     >
-      {categories[text] ? categories[text].toUpperCase() : ""}
-    </Styled.a>
+      {categories.map(category => (
+        <Styled.a
+          key={`${title}-${category}`}
+          as={Link}
+          to={`/categories/${category}/`}
+          css={css({
+            boxShadow:
+              colorMode === "dark" ? `textShadowDark` : `textShadowLight`,
+            padding: `0 2px`,
+            marginRight: `0.4em`,
+            textDecoration: `none`,
+          })}
+        >
+          {allCategories[category] ? allCategories[category].toUpperCase() : ""}
+        </Styled.a>
+      ))}
+    </div>
   )
 }
 
-CategoryPill.propTypes = {
-  text: PropTypes.string.isRequired,
+Categories.propTypes = {
+  title: PropTypes.string.isRequired, // To generate unique key in map
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
+
+const Tags = ({ tags, title }) => (
+  <div
+    style={{
+      display: `flex`,
+      fontSize: `0.9rem`,
+    }}
+  >
+    {tags.map(tag => (
+      <Styled.a
+        key={`${title}-${tag}`}
+        as={Link}
+        to={`/tags/${tag}/`}
+        style={{
+          textDecoration: `none`,
+          marginRight: `0.5rem`,
+        }}
+      >
+        {`#${tag}`}
+      </Styled.a>
+    ))}
+  </div>
+)
+
+Tags.propTypes = {
+  title: PropTypes.string.isRequired, // To generate unique key in map
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 const ReadMoreButton = ({ url }) => (
   <Styled.a
     as={Link}
     to={url}
-    style={{
+    css={css({
       textDecoration: `none`,
-      position: `absolute`,
-      right: `0`,
-      bottom: `0`,
       fontSize: `0.8rem`,
-    }}
+      borderRadius: `0.8rem`,
+      borderColor: `primary`,
+      border: `2px solid`,
+      padding: `0.2rem 0.5rem`,
+    })}
   >
-    <span
-      css={css({
-        borderRadius: `0.8rem`,
-        borderColor: `primary`,
-        border: `2px solid`,
-        padding: `0.2rem 0.5rem`,
-      })}
-    >
-      Read Post
-    </span>
+    Read Post
   </Styled.a>
 )
 
@@ -55,7 +88,15 @@ ReadMoreButton.propTypes = {
   url: PropTypes.string.isRequired,
 }
 
-const PostCard = ({ title, categories, excerpt, date, timeToRead, url }) => {
+const PostCard = ({
+  title,
+  categories,
+  tags,
+  excerpt,
+  date,
+  timeToRead,
+  url,
+}) => {
   return (
     <div
       style={{
@@ -90,19 +131,18 @@ const PostCard = ({ title, categories, excerpt, date, timeToRead, url }) => {
       >
         {`${date} • ${timeToRead} min read`}
       </div>
+      <Categories {...{ categories, title }} />
+      <span>{excerpt}</span>
       <div
         style={{
-          fontSize: `0.8rem`,
           display: `flex`,
-          marginBottom: `0.3rem`,
+          justifyContent: `space-between`,
+          marginTop: `0.2rem`,
         }}
       >
-        {categories.map(text => (
-          <CategoryPill {...{ text }} key={`${title}-${text}`} />
-        ))}
+        <Tags {...{ tags, title }} />
+        <ReadMoreButton {...{ url }} />
       </div>
-      <span>{excerpt}</span>
-      <ReadMoreButton {...{ url }} />
     </div>
   )
 }
@@ -110,6 +150,7 @@ const PostCard = ({ title, categories, excerpt, date, timeToRead, url }) => {
 PostCard.propTypes = {
   title: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   excerpt: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   timeToRead: PropTypes.number.isRequired,

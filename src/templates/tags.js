@@ -1,16 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostCard from "../components/post-card"
 
-const IndexPage = ({ data }) => {
+export default ({ data, pageContext }) => {
   const { edges } = data.allMdx
   return (
     <Layout>
-      <SEO title="Home" />
-      <p>Latest Blog Posts</p>
+      <SEO title="Tags" />
+      <p
+        style={{ fontWeight: `bold` }}
+      >{`Posts tagged with "${pageContext.tag}"`}</p>
       {edges.map(({ node }) => {
         const { id, frontmatter, excerpt, fields, timeToRead } = node
         const { title, date, categories, tags } = frontmatter
@@ -27,11 +28,14 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default IndexPage
-
 export const query = graphql`
-  {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+  query($tag: String) {
+    allMdx(
+      limit: 200
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
       edges {
         node {
           id
