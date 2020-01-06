@@ -42,7 +42,7 @@ export const query = graphql`
         node {
           id
           frontmatter {
-            date
+            date(formatString: "MMMM DD, YYYY")
             tags
             title
             categories
