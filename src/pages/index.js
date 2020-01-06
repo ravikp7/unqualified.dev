@@ -13,11 +13,11 @@ const IndexPage = ({ data }) => {
       <p>Latest Blog Posts</p>
       {edges.map(({ node }) => {
         const { id, frontmatter, excerpt, fields, timeToRead } = node
-        const { title, date, tags } = frontmatter
+        const { title, date, categories } = frontmatter
         const { slug } = fields
         return (
           <PostCard
-            {...{ title, tags, excerpt, date, timeToRead }}
+            {...{ title, categories, excerpt, date, timeToRead }}
             url={slug}
             key={id}
           />
@@ -39,6 +39,7 @@ export const query = graphql`
             date
             tags
             title
+            categories
           }
           excerpt
           fields {

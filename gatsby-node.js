@@ -1,5 +1,6 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
+const categories = require("./src/utils/categories")
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -37,6 +38,17 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug,
       },
+    })
+  })
+
+  // Create pages for all categories
+  Object.keys(categories).forEach(category => {
+    createPage({
+      path: `/categories/${category}/`,
+      component: path.resolve("./src/templates/categories.js"),
+      context: {
+        category
+      }
     })
   })
 }
