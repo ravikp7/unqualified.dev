@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { css } from "theme-ui"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 // import NewsLetter from "../components/newsletter"
 
@@ -13,11 +14,12 @@ export default ({ data }) => {
     <Layout>
       <SEO {...{ title }} />
       <div>
-        <h1
-          style={{
+        <h2
+          css={css({
             marginBottom: '0',
-          }}
-        >{title}</h1>
+            color: `primary`,
+          })}
+        >{title}</h2>
         <p
           style={{
             fontSize: '0.9rem',
