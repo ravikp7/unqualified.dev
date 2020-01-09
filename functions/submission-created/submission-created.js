@@ -1,5 +1,5 @@
 const mailgun = require("mailgun-js")
-const DOMAIN = "unqualifed.dev"
+const DOMAIN = "unqualified.dev"
 const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN })
 
 exports.handler = function(event, context, callback) {
