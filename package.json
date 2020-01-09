@@ -52,7 +52,11 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "clean-functions": "rm -rf functions-build && mkdir functions-build",
+    "zip-functions": "cd functions/submission-created && yarn install && zip -r submission-created.zip *",
+    "postzip": "mv functions/submission-created/submission-created.zip functions-build",
+    "prebuild": "npm run clean-functions && npm run zip-functions"
   },
   "repository": {
     "type": "git",
