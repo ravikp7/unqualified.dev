@@ -1,0 +1,12 @@
+{
+  "name": "contact-email",
+  "description": "Netlify function for sending email",
+  "version": "0.1.0",
+  "author": "Ravi Kumar Prasad <7ravikp@gmail.com>",
+  "dependencies": {
+    "mailgun-js": "^0.22.0"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "scripts": {}
+}
