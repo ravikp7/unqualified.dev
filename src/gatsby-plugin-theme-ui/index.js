@@ -3,7 +3,7 @@ import typography from "./typography"
 import colors from "./colors"
 import styles from "./styles"
 import prism from "./prism"
-import shadows from './shadows'
+import shadows from "./shadows"
 
 const theme = merge(typography, {
   initialColorMode: `light`,
@@ -18,6 +18,12 @@ const theme = merge(typography, {
   styles,
   prism,
   shadows,
+  buttons: {
+    primary: {
+      color: "white",
+      bg: "primary",
+    },
+  },
 })
 
 export default theme

@@ -6,8 +6,10 @@ const black80 = `#1c313a`
 const white = `#fff`
 const lightWhite = `rgba(255, 255, 255, 0.86)`
 const opaqueLightYellow = `rgba(255, 229, 229, 0.2)`
-const opaqueLightWhite = `hsla(0, 0%, 100%, 0.2)`
-const lightGray = `hsla(0, 0%, 0%, 0.2)`
+const opaqueWhite20 = `hsla(0, 0%, 100%, 0.2)`
+const opaqueWhite60 = `hsla(0, 0%, 100%, 0.6)`
+const gray20 = `hsla(0, 0%, 0%, 0.2)`
+const gray60 = `hsla(0, 0%, 0%, 0.6)`
 
 export default {
   initialColorModeName: "light",
@@ -16,7 +18,8 @@ export default {
   background: white,
   primary: `#006978`,
   secondary: opaqueLightYellow,
-  muted: lightGray,
+  muted: gray20,
+  mutedMore: gray60,
   highlight: lightHighlight,
   heading: black90,
   prism: {
@@ -42,7 +45,8 @@ export default {
       background: black90,
       primary,
       secondary: black80,
-      muted: opaqueLightWhite,
+      muted: opaqueWhite20,
+      mutedMore: opaqueWhite60,
       highlight: darkHighlight,
       heading: white,
       prism: {

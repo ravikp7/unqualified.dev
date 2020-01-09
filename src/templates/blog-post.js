@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+// import NewsLetter from "../components/newsletter"
 
 export default ({ data }) => {
   const post = data.mdx
@@ -27,6 +28,7 @@ export default ({ data }) => {
         </p>
         <MDXRenderer>{body}</MDXRenderer>
       </div>
+      {/* <NewsLetter /> */}
     </Layout>
   )
 }

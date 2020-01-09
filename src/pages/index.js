@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostCard from "../components/post-card"
+import ContactForm from "../components/contact-form"
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMdx
@@ -23,6 +24,7 @@ const IndexPage = ({ data }) => {
           />
         )
       })}
+      <ContactForm />
     </Layout>
   )
 }
