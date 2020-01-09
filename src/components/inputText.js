@@ -30,7 +30,7 @@ const InputText = ({ label, name, required, isTextarea, style, type }) => {
         </span>
         <InputTag
           id={name}
-          {...{ type, required }}
+          {...{ type, required, name }}
           css={css({
             padding: `0.5rem`,
             border: `0.5px solid`,

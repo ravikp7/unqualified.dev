@@ -27,8 +27,8 @@ const ContactForm = () => {
       >
         Say Hello!
       </span>
-      <InputText name="guestName" label="Your Name" required />
-      <InputText name="email" type="email" label="Your Email Address" required />
+      <InputText name="visitor-name" label="Your Name" required />
+      <InputText name="visitor-email" type="email" label="Your Email Address" required />
       <InputText
         name="message"
         label="Your Message"
