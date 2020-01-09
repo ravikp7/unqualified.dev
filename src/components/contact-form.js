@@ -8,7 +8,7 @@ const ContactForm = () => {
   return (
     <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field"
       css={css({
-        margin: `2rem auto`,
+        margin: `3rem auto`,
         padding: `1rem 1.5rem`,
         boxShadow: colorMode === "dark" ? `primaryDark` : `primaryLight`,
         display: `flex`,
@@ -39,7 +39,7 @@ const ContactForm = () => {
         }}
       />
       <input type="hidden" name="form-name" value="contact" />
-      <Button text="SEND" onClick={() => {}} />
+      <Button text="SEND" />
     </form>
   )
 }
