@@ -41,6 +41,7 @@ const ContactForm = () => {
       <input type="hidden" name="form-name" value="contact" />
       <Button text="SEND" onClick={() => {
           const form = document.getElementById('contact-form')
+          form.submit()
           form.reset()
       }}/>
     </form>
