@@ -5,15 +5,17 @@ const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN })
 exports.handler = function(event, context, callback) {
   // your server-side functionality
 
-  const body = JSON.parse(event.body).payload
+  const info = JSON.parse(event.body).payload.data
 
-  const { visitor_name, visitor_email, messaage } = body.data
+  const { messaage } = info
+  const visitorName = info['visitor-name']
+  const visitorEmail = info['visitor-email']
 
   const data = {
-    from: `Guest <guest@unqualified.dev>`,
+    from: `Visitor <visitor@unqualified.dev>`,
     to: "7ravikp@gmail.com",
-    subject: `Hello from ${visitor_name}`,
-    text: `From: ${visitor_name} <${visitor_email}> \n ${messaage}`,
+    subject: `Hello from ${visitorName}`,
+    text: `From: ${visitorName} <${visitorEmail}> \n ${messaage}`,
   }
 
   mg.messages().send(data, function(error, body) {
