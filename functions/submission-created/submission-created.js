@@ -15,7 +15,7 @@ exports.handler = function(event, context, callback) {
     from: `Visitor <visitor@unqualified.dev>`,
     to: "7ravikp@gmail.com",
     subject: `Hello from ${visitorName}`,
-    text: `From: ${visitorName} <${visitorEmail}> \n ${message}`,
+    text: `From: ${visitorName}  <${visitorEmail}> \n\n\n ${message}`,
   }
 
   mg.messages().send(data, function(error, body) {
