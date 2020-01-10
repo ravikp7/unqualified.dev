@@ -7,7 +7,7 @@ exports.handler = function(event, context, callback) {
 
   const info = JSON.parse(event.body).payload.data
 
-  const { messaage } = info
+  const { message } = info
   const visitorName = info['visitor-name']
   const visitorEmail = info['visitor-email']
 
@@ -15,7 +15,7 @@ exports.handler = function(event, context, callback) {
     from: `Visitor <visitor@unqualified.dev>`,
     to: "7ravikp@gmail.com",
     subject: `Hello from ${visitorName}`,
-    text: `From: ${visitorName} <${visitorEmail}> \n ${messaage}`,
+    text: `From: ${visitorName} <${visitorEmail}> \n ${message}`,
   }
 
   mg.messages().send(data, function(error, body) {
