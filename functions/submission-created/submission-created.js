@@ -7,12 +7,14 @@ exports.handler = function(event, context, callback) {
 
   const body = JSON.parse(event.body).payload
 
+  const { visitor_name, visitor_email, messaage } = body.data
+
   const data = {
-  from: "Excited User <me@samples.mailgun.org>",
-  to: "bar@example.com, 7ravikp@gmail.com",
-  subject: "Hello",
-  text: JSON.stringify(body),
-}
+    from: `Guest <guest@unqualified.dev>`,
+    to: "7ravikp@gmail.com",
+    subject: `Hello from ${visitor_name}`,
+    text: `From: ${visitor_name} <${visitor_email}> \n ${messaage}`,
+  }
 
   mg.messages().send(data, function(error, body) {
     if (error) {
@@ -22,7 +24,7 @@ exports.handler = function(event, context, callback) {
     }
     return callback(null, {
       statusCode: 200,
-      body: "Beep, boop, you just got serverless."
+      body: "Message processed!",
     })
   })
 }
