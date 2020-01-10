@@ -6,7 +6,7 @@ import Button from "./button"
 const ContactForm = () => {
   const [colorMode] = useColorMode()
   return (
-    <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field"
+    <form id="contact-form" name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field"
       css={css({
         margin: `3rem auto`,
         padding: `1rem 1.5rem`,
@@ -39,7 +39,10 @@ const ContactForm = () => {
         }}
       />
       <input type="hidden" name="form-name" value="contact" />
-      <Button text="SEND" />
+      <Button text="SEND" onClick={() => {
+          const form = document.getElementById('contact-form')
+          form.reset()
+      }}/>
     </form>
   )
 }
