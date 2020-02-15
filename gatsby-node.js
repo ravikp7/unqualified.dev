@@ -6,10 +6,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === "Mdx") {
     const slug = createFilePath({ node, getNode, basePath: "posts" })
+    // convert '/1-javascript-prototypes/' to '/javascript-prototypes/'
+    const modifiedSlug = slug.replace(/^\/\d+-/, '/');
     createNodeField({
       node,
       name: "slug",
-      value: `/blog${slug}`,
+      value: `/blog${modifiedSlug}`,
     })
   }
 }
