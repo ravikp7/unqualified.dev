@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from 'prop-types'
 import { css } from "theme-ui"
 
-const Button = ({ text, onClick }) => {
+const Button = ({ text, onClick, style }) => {
   return (
     <button
       css={css({
@@ -13,6 +13,7 @@ const Button = ({ text, onClick }) => {
         padding: `0.8rem`,
         fontSize: `0.9rem`,
         color: `background`,
+        ...style,
       })}
       {...{ onClick }}
     >
@@ -23,11 +24,13 @@ const Button = ({ text, onClick }) => {
 
 Button.defaultProps = {
   onClick: () => {},
+  style: {},
 }
 
 Button.propTypes = {
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func,
+    style: PropTypes.object,
 }
 
 export default Button;
