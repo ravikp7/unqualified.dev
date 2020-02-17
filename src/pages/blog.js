@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Styled } from "theme-ui"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -23,6 +24,16 @@ const BlogPage = ({ data }) => {
           />
         )
       })}
+      <Styled.a
+          href="https://medium.com/@ravikp7"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            marginRight: 0,
+          }}
+        >
+          See old posts on Medium.com
+        </Styled.a>
     </Layout>
   )
 }
